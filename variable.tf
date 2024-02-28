@@ -6,5 +6,5 @@ variable "display_name" {
 variable "owner_upns" {
   type = list(string)
   description = "List of user principal name, i.e. primmary email."
-  default = []
+  default = ["ms_ga@cnb24.de"]
 }

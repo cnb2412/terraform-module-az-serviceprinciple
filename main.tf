@@ -1,6 +1,6 @@
 data "azuread_user" "owners" {
   for_each = toset(var.owner_upns)
-  user_principal_name = each.key
+  user_principal_name = each.value
 }
 
 resource "azuread_application" "myapp" {
