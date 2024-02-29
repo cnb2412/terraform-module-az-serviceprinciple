@@ -6,14 +6,16 @@ data "azuread_user" "owners" {
 resource "azuread_application" "myapp" {
   display_name = var.display_name
   owners       = values(data.azuread_user.owners)[*].object_id
+  description = var.description
 }
 
-# resource "azuread_service_principal" "az_sp" {
-#   application_id               = azuread_application.az_devoops_cnb2412_app.application_id
-#   app_role_assignment_required = false
-#   owners                       = [data.azuread_client_config.current.object_id]
-#   description = "Used by az DevOps Projekt for AZ base iac config. Created by terraform-az-bootstarp"
-# }
+resource "azuread_service_principal" "mysp" {
+  application_id               = azuread_application.myapp.application_id
+  app_role_assignment_required = false
+  owners                       = values(data.azuread_user.owners)[*].object_id
+  description = var.description
+  account_enabled = var.account_enabled
+}
 
 # resource "azuread_service_principal_password" "az_sp_pwd" {
 #     service_principal_id = azuread_service_principal.az_sp.object_id

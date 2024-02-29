@@ -8,3 +8,15 @@ variable "owner_upns" {
   description = "List of user principal name, i.e. primmary email."
   default = []
 }
+
+variable "description" {
+    type = string
+    default = ""
+    description = "Description of the Serivce Principle. Default empty string"
+}
+
+variable "description" {
+    type = string
+    default = ""
+    description = "Description of the Serivce Principle. Default empty string"
+}
