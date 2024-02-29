@@ -17,6 +17,14 @@ resource "azuread_service_principal" "mysp" {
   account_enabled = var.account_enabled
 }
 
+resource "azuread_service_principal_certificate" "cert" {
+  count = length(var.certificate) > 0 ? 1 : 0
+  service_principal_id = azuread_service_principal.mysp.id
+  type                 = "AsymmetricX509Cert"
+  value                = var.certificate
+  end_date_relative    = var.end_date_relative
+}
+
 # resource "azuread_service_principal_password" "az_sp_pwd" {
 #     service_principal_id = azuread_service_principal.az_sp.object_id
 #     display_name = "Az-DevOps_secret"

@@ -20,3 +20,15 @@ variable "account_enabled" {
     default = true
     description = "Whether or not the service principal account is enabled. Defaults to true"
 }
+
+variable "certificate" {
+    type = string
+    default = ""
+    description = "Certificate for service principle. Default is empty string."
+}
+
+variable "end_date_relative" {
+    type = string
+    default = "2400h"
+    description = "Relative duration for which the certificate is valid until. Default is 2400h, i.e. 100days"
+}
