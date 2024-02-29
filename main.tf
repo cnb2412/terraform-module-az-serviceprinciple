@@ -5,7 +5,7 @@ data "azuread_user" "owners" {
 
 resource "azuread_application" "myapp" {
   display_name = var.display_name
-  owners       = data.azuread_user.owners[*].object_id
+  owners       = values(data.azuread_user.owners)[*].object_id
 }
 
 # resource "azuread_service_principal" "az_sp" {
