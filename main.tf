@@ -10,7 +10,7 @@ resource "azuread_application" "myapp" {
 }
 
 resource "azuread_service_principal" "mysp" {
-  application_id               = azuread_application.myapp.application_id
+  client_id               = azuread_application.myapp.client_id
   app_role_assignment_required = false
   owners                       = values(data.azuread_user.owners)[*].object_id
   description = var.description
