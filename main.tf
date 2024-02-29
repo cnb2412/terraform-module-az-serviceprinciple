@@ -4,13 +4,15 @@ data "azuread_user" "owners" {
 }
 
 resource "azuread_application" "myapp" {
+  count = var.remove_sp ? 0 : 1
   display_name = var.display_name
   owners       = values(data.azuread_user.owners)[*].object_id
   description = var.description
 }
 
 resource "azuread_service_principal" "mysp" {
-  client_id               = azuread_application.myapp.client_id
+  count = var.remove_sp ? 0 : 1
+  client_id               = azuread_application.myapp[0].client_id
   app_role_assignment_required = false
   owners                       = values(data.azuread_user.owners)[*].object_id
   description = var.description
@@ -18,8 +20,8 @@ resource "azuread_service_principal" "mysp" {
 }
 
 resource "azuread_service_principal_certificate" "cert" {
-  count = length(var.certificate) > 0 ? 1 : 0
-  service_principal_id = azuread_service_principal.mysp.id
+  count = !var.remove_sp && length(var.certificate) > 0 ? 1 : 0
+  service_principal_id = azuread_service_principal.mysp[0].id
   type                 = "AsymmetricX509Cert"
   value                = var.certificate
   end_date_relative    = var.end_date_relative

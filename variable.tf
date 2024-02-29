@@ -1,3 +1,12 @@
+variable "remove_sp" {
+    type = bool
+    default = false
+    description = <<EOT
+        Set this to true to destroy everything.
+        Option is there to avoid deleted module issue. Default: false"
+        EOT
+}
+
 variable "display_name" {
   type = string
   description = "Displayname for service principle app"
