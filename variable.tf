@@ -15,8 +15,8 @@ variable "description" {
     description = "Description of the Serivce Principle. Default empty string"
 }
 
-variable "description" {
-    type = string
-    default = ""
-    description = "Description of the Serivce Principle. Default empty string"
+variable "account_enabled" {
+    type = bool
+    default = true
+    description = "Whether or not the service principal account is enabled. Defaults to true"
 }
